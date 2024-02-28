@@ -180,8 +180,10 @@ function evaluatePostfix(postfix) {
         } else {
             let operand2 = stack.pop();
             let operand1 = stack.pop();
-
+            console.log(token);
+            console.log("Operands:" + operand1 + operand2);
             switch (token) {
+                
                 case '+':
                     stack.push(sum(operand1, operand2));
                     break;
@@ -205,7 +207,7 @@ function evaluatePostfix(postfix) {
                     stack.push(power(operand1, operand2));
                     break;
                 case '√':
-                    stack.push(squareRoot(operand1));
+                    !operand1 ? stack.push(squareRoot(operand2)) : stack.push(squareRoot(operand1));
                     break;
                 default:
                     break;
