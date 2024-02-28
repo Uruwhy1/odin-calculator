@@ -50,11 +50,12 @@ function removeLastItem() {
 
 // OPERATIONS
 
+/// The "+" at the beginnings are to convert to floating number if .00
 function sum(a, b) {
-    return a + b;
+    return +(a + b).toFixed(2);
 }
 function rest(a, b) {
-    return a - b;
+    return +(a - b).toFixed(2);
 }
 function divide(a, b) {
     return +(a / b).toFixed(2);
@@ -85,14 +86,37 @@ function returnResult(string) {
     // Split the input string
     let array = string.split(/([+\-%*^/()√])/).filter(token => token.trim() !== '');
 
+    let mergedTokens = []; // Array to make my life easier when convertin negatives
+    let isNegative = false; // Flag to track if the previous token was '-'
+    let previousToken = null;
+
+    // Merge '-' with the next token if necessary
+    for (let i = 0; i < array.length; i++) {
+        let token = array[i];
+
+        if (token === '-' && isNegative == false && (previousToken == null || /(?<=[+%*^/(√])/.test(previousToken))) {
+            // If the current token is '-' and the previous token wasn't '-',
+            // set the flag to true to indicate that the next token should be merged
+            isNegative = true;
+        } else {
+            if (isNegative) {
+                token = -token;
+                isNegative = false;
+            } 
+            mergedTokens.push(token); 
+        } previousToken = token;
+    }
+
     // Initialize variables
     let result = null;
     let operator = null;
     let operands = [];
     let stack = []; // To track parentheses (we operate on the stacks first)
 
+
+
     // Process each token
-    for (let token of array) {
+    for (let token of mergedTokens) {
         if (token === '(') {
             // Push opening parenthesis onto the stack
             stack.push(token);
@@ -113,13 +137,13 @@ function returnResult(string) {
         } else {
             // Handle operands
             operands.push(parseFloat(token));
-        }
+            
+        } previousToken = token;
     }
-
     // Evaluate any remaining expressions in the stack
-    while (stack.length > 0) {
-        let tempOperator = stack.pop();
-        let tempOperands = operands.splice(operands.length - 2, 2);
+    while (stack.length > 0 || operands.length > 1) {
+        let tempOperator = stack.shift();
+        let tempOperands = operands.splice(0, 2);
         let tempResult = evaluateExpression(tempOperands[0], tempOperator, tempOperands[1]);
         operands.push(tempResult);
     }
@@ -127,20 +151,26 @@ function returnResult(string) {
     // The final result will be the only element in the operands array
     result = operands[0];
 
+
     // Update display with the result
-    if (isNaN(result)) {
+    if (isNaN(result) || result == null) {
         displayText.textContent = "ERR0R";
     } else {
         displayText.textContent = result;
     }
+
+        console.log(mergedTokens);
+    console.log(array);
     adjustFontSize();
 }
 
 function evaluateExpression(operand1, operator, operand2) {
     switch (operator) {
         case '+':
+            console.log("sum")
             return sum(operand1, operand2);
         case '-':
+            console.log("rest")
             return rest(operand1, operand2);
         case '*':
             return multiply(operand1, operand2);
@@ -155,32 +185,4 @@ function evaluateExpression(operand1, operator, operand2) {
         default:
             return null;
     }
-}
-
-function calculate(operands, operator) {
-    let result = null;
-    switch (operator) {
-        case '+':
-            result = sum(operands[0], operands[1]);
-            break;
-        case '-':
-            result = rest(operands[0], operands[1]);
-            break;
-        case '*':
-            result = multiply(operands[0], operands[1]);
-            break;
-        case '/':
-            result = divide(operands[0], operands[1]);
-            break;
-        case '%':
-            result = remainder(operands[0], operands[1]);
-            break;
-        case '^':
-            result = power(operands[0], operands[1]);
-            break;
-        case '√':
-            result = squareRoot(operands[0]);
-            break;
-    }
-    return result;
 }

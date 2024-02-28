@@ -1,21 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Math&display=swap');
-
-
-/* Define @font-face rules for Orbitron and Noto Sans Math */
-@font-face {
-    font-family: 'Orbitron';
-    src: url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap') format('woff');
-    unicode-range: U+0020-007E; /* ASCII characters */
-}
-
-@font-face {
-    font-family: 'Noto Sans Math';
-    src: url('https://fonts.googleapis.com/css2?family=Noto+Sans+Math&display=swap') format('woff');
-    unicode-range: U+221A, U+005E; /* Square root and ^ characters */
-}
-
-
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Math&display=swap&text=√^');
 * {
     box-sizing: border-box;
 }
