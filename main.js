@@ -153,7 +153,7 @@ function returnResult(string) {
 
 
     // Update display with the result
-    if (isNaN(result) || result == null) {
+    if ((isNaN(result) || result == null) && result != "IDI0T") {
         displayText.textContent = "ERR0R";
     } else {
         displayText.textContent = result;
@@ -175,7 +175,9 @@ function evaluateExpression(operand1, operator, operand2) {
         case '*':
             return multiply(operand1, operand2);
         case '/':
-            return divide(operand1, operand2);
+            if(operand2 == 0) {
+                return "IDI0T"
+            } else return divide(operand1, operand2);
         case '%':
             return remainder(operand1, operand2);
         case '^':
