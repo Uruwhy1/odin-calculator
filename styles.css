@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Math&display=swap&text=√^');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Math&display=swap');
+
 * {
     box-sizing: border-box;
 }
@@ -37,6 +39,8 @@ body {
     background-color: #333333;
 
     display: flex;
+    flex-wrap: nowrap;
+
     justify-content: flex-end;
     overflow: hidden;
     align-items: center;
@@ -48,7 +52,33 @@ body {
     color: #E0E0E0;
 
     padding-right: 10px;
-    text-align: end;
+    display: inline-block;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap; /* Prevent wrapping to new lines */
+}
+
+/* Firefox Scrollbar Options */
+@-moz-document url-prefix() {
+    .display p {
+    scrollbar-color: #999999  #333333;
+    scrollbar-width: thin;
+    }
+}
+
+/* Other browsers Scrollbar Options */
+.display p::-webkit-scrollbar {
+    height: 10px;
+    background: #333333;
+}
+.display p::-webkit-scrollbar-thumb {
+    background: #999999;
+}
+.display p:hover::-webkit-scrollbar-thumb {
+    background: #7f7f7f;
+}
+.display p:active::-webkit-scrollbar-thumb {
+    background: #d9d9d9;
 }
 
 /* CALCULATOR - KEYS CSS */
@@ -77,6 +107,25 @@ body {
     width: 25%;
 }
 
+/* Styling for different types of keys */
+.key, .double-key {
+    border-radius: 10px;
+    border: 0px;
+    transition: 0.2s;
+
+    color: #000000 ;
+    font-weight: 600;
+    font-size: 30px;
+    font-family: 'orbitron', 'Noto Sans Math';
+}
+.key:active, .double-key:active {
+    transform: scale(1.03)
+}
+
+.bracket {
+    font-family: 'Noto Sans Math';
+}
+
 .double-key {
     width: calc(25% * 2);
     background-color: #008CBA;
@@ -84,20 +133,10 @@ body {
 .double-key:hover {
     background-color: #0077B6;
 }
-
-/* Styling for different types of keys */
-
-.key, .double-key {
-    border-radius: 10px;
-    border: 0px;
-
-
-    color: #000000 ;
-    font-weight: 600;
-    font-size: 30px;
-    font-family: 'orbitron','Noto Sans Math', sans-serif;
-
+.double-key:active {
+    background-color: #0056B3;
 }
+
 
 .numeric {
     background-color: #E0E0E0;
@@ -105,20 +144,34 @@ body {
 .numeric:hover {
     background-color: #CCCCCC;
 }
+.numeric:active {
+    background-color: #BFBFBF;
+}
 
 .non-numeric {
     background-color: #FFA500;
-    
 }
 .non-numeric:hover {
     background-color: #FF9500   ;
+}
+.non-numeric:active{
+    background-color: #FF7F00;
 }
 
 .delete {
     color:#FFFFFF ;
     background-color:#FF6347;
-    
+
 }
 .delete:hover {
-    background-color: #E74C3C ;
+    background-color:#E74C3C ;
+}
+.delete:active {
+    background-color: #D95238;
+}
+
+/* Size increase for certain keys */
+.font {
+    font-size: 35px;
+    font-weight: 600;
 }

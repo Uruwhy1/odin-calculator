@@ -1,15 +1,25 @@
 const display = document.querySelector('.display');
-const displayText = document.querySelector('.display-numbers');
+let displayText = document.querySelector('.display-numbers');
+
+/// Clear the display if you input a number after a calculation has been done 
+let clearOnInput = false;
+
+function checkIfClear(value) {
+if(clearOnInput == true && (value).match(/\d+/)) {
+    clearOnInput = false;
+    clearDisplay()
+} else (clearOnInput = false);
+}
 
 // DYNAMIC FONT SIZE IN DISPLAY
 function adjustFontSize() {
     const containerWidth = display.offsetWidth;
     const textWidth = displayText.scrollWidth;
-    const minimumSize = 27;
+    const minimumSize = 45;
 
     // Calculate the current font size
     let currentFontSize = parseFloat(getComputedStyle(displayText).fontSize);
-    let newFontSize = currentFontSize - 10;
+    let newFontSize = currentFontSize - 7;
 
     if (textWidth + 10 > containerWidth) {
         if (newFontSize < minimumSize) {
@@ -20,7 +30,39 @@ function adjustFontSize() {
     }
 }
 
+// TYPING WITH KEYBOARD
+
+/// Input every key pressed into Display
+document.addEventListener("keyup", (e) => {
+    checkIfClear(e.key)
+
+    if(e.key == 'Enter' || e.key == '=') {
+        document.activeElement.blur();
+        calculateResult()
+    } else if (e.key == 'Backspace') {
+        removeLastItem()
+    } else if(e.key == ' ') {
+        document.activeElement.blur();
+        displayText.textContent += " ";
+    } else if (e.key == 'Escape') {
+        clearDisplay();
+    } else
+    displayText.textContent += e.key;
+    adjustFontSize()
+  });
+
+/// Remove Firefox's 'Quick Find' feature so the '/' key works
+function keydown(event) {
+    if(  event.code == "NumpadDivide"
+      || event.code == "Slash"
+      || event.code == "Quote") {
+        event.preventDefault();
+    }
+}
+window.addEventListener("keydown", keydown, {capture: true} );
+
 // BUTTON HANDLING
+
 
 /// Get all buttons and add event listeners to them
 const buttons = document.querySelectorAll('.key');
@@ -78,15 +120,21 @@ function squareRoot(a) {
 
 // CALCULATE RESULT
 
-/// Deisplay Variable
 let displayString;
 
 function calculateResult() {
     displayString = displayText.textContent;
-    returnResult(displayString);
+    clearOnInput = true;
+
+    if(!(displayText.textContent).match(/([+\-%*^/√])/)) {
+        displayText.textContent = "ERR0R"
+        console.error('Error: Sign not Found')
+    }
+    else {returnResult(displayString)};
 }
 
 function returnResult(string) {
+    
     // Define operator precedence
     const precedence = {
         '+': 1,
@@ -125,6 +173,7 @@ function returnResult(string) {
 
     if ((isNaN(result) || result == null) && result != "IDI0T") {
         displayText.textContent = "ERR0R";
+        console.error('Error: Invalid Operation')
     } else {
         displayText.textContent = result;
     }
@@ -175,13 +224,12 @@ function evaluatePostfix(postfix) {
     let stack = [];
 
     for (let token of postfix) {
+
         if (!isNaN(token)) {
             stack.push(parseFloat(token));
         } else {
             let operand2 = stack.pop();
             let operand1 = stack.pop();
-            console.log(token);
-            console.log("Operands:" + operand1 + operand2);
             switch (token) {
                 
                 case '+':
@@ -195,6 +243,7 @@ function evaluatePostfix(postfix) {
                     break;
                 case '/':
                     if (operand2 === 0) {
+                        console.error("Error: Trying to divide by zero")
                         return "IDI0T";
                     } else {
                         stack.push(divide(operand1, operand2));
@@ -214,6 +263,5 @@ function evaluatePostfix(postfix) {
             }
         }
     }
-
     return stack.pop();
 }

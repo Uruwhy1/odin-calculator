@@ -10,55 +10,51 @@
 <body>
     <div class="calculator">
         <div class="display">
-            <p class="display-numbers">(3 + 2) * 2 + (7 - 5) / 2</p>
+            <p class="display-numbers"></p>
         </div>
 
         <div class="keys-container">
-            
             <div class="row">
                 <button class="delete key" onclick="removeLastItem()">DE</button>
                 <button class="delete key" onclick="clearDisplay()">AC</button>
-                <button class="font non-numeric key" onclick="appendToDisplay('(')">(</button>
-                <button class="font non-numeric key" onclick="appendToDisplay(')')">)</button>
-
+                <button class="bracket non-numeric key" onclick="appendToDisplay('(', checkIfClear('('))">(</button>
+                <button class="bracket non-numeric key" onclick="appendToDisplay(')', checkIfClear(')'))">)</button>
             </div>
-
+        
             <div class="row">
-                <button class="font non-numeric key" onclick="appendToDisplay('^')">^</button>
-                <button class="font non-numeric key" onclick="appendToDisplay('√')">√</button>
-                <button class="non-numeric key" onclick="appendToDisplay('%')">%</button>
-                <button class="non-numeric key" onclick="appendToDisplay('*')">*</button>
-            </div>
-            
-            <div class="row">
-                <button class="numeric key" onclick="appendToDisplay('7')">7</button>
-                <button class="numeric key" onclick="appendToDisplay('8')">8</button>
-                <button class="numeric key" onclick="appendToDisplay('9')">9</button>
-                <button class="non-numeric key" onclick="appendToDisplay('/')">/</button>
+                <button class="font non-numeric key" onclick="appendToDisplay('^', checkIfClear('^'))">^</button>
+                <button class="font non-numeric key" onclick="appendToDisplay('√', checkIfClear('√'))">√</button>
+                <button class="non-numeric key" onclick="appendToDisplay('%', checkIfClear('%'))">%</button>
+                <button class="non-numeric key" onclick="appendToDisplay('*', checkIfClear('*'))">*</button>
             </div>
             
             <div class="row">
-                <button class="numeric key" onclick="appendToDisplay('4')">4</button>
-                <button class="numeric key" onclick="appendToDisplay('5')">5</button>
-                <button class="numeric key" onclick="appendToDisplay('6')">6</button>
-                <button class="non-numeric key" onclick="appendToDisplay('-')">-</button>
+                <button class="numeric key" onclick="appendToDisplay('7', checkIfClear('7'))">7</button>
+                <button class="numeric key" onclick="appendToDisplay('8', checkIfClear('8'))">8</button>
+                <button class="numeric key" onclick="appendToDisplay('9', checkIfClear('9'))">9</button>
+                <button class="non-numeric key" onclick="appendToDisplay('/', checkIfClear('/'))">/</button>
             </div>
             
             <div class="row">
-                <button class="numeric key" onclick="appendToDisplay('1')">1</button>
-                <button class="numeric key" onclick="appendToDisplay('2')">2</button>
-                <button class="numeric key" onclick="appendToDisplay('3')">3</button>
-                <button class="non-numeric key" onclick="appendToDisplay('+')">+</button>
+                <button class="numeric key" onclick="appendToDisplay('4', checkIfClear('4'))">4</button>
+                <button class="numeric key" onclick="appendToDisplay('5', checkIfClear('5'))">5</button>
+                <button class="numeric key" onclick="appendToDisplay('6', checkIfClear('6'))">6</button>
+                <button class="font non-numeric key" onclick="appendToDisplay('-', checkIfClear('-'))">-</button>
             </div>
             
             <div class="row">
-                <button class="numeric key" onclick="appendToDisplay('0')">0</button>
-                <button class="numeric key" onclick="appendToDisplay('.')">.</button>
+                <button class="numeric key" onclick="appendToDisplay('1', checkIfClear('1'))">1</button>
+                <button class="numeric key" onclick="appendToDisplay('2', checkIfClear('2'))">2</button>
+                <button class="numeric key" onclick="appendToDisplay('3', checkIfClear('3'))">3</button>
+                <button class="font non-numeric key" onclick="appendToDisplay('+', checkIfClear('+'))">+</button>
+            </div>
+            
+            <div class="row">
+                <button class="numeric key" onclick="appendToDisplay('0', checkIfClear('0'))">0</button>
+                <button class="numeric key" onclick="appendToDisplay('.', checkIfClear('.'))">.</button>
                 <button class="double-key" onclick="calculateResult()">=</button>
             </div>
-
-            
         </div>
-    </div>
+        
 </body>
 </html>
