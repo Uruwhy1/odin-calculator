@@ -1,7 +1,37 @@
 const display = document.querySelector('.display');
+const displayBox = document.querySelector('.display-box')
 let displayText = document.querySelector('.display-numbers');
 
-/// Clear the display if you input a number after a calculation has been done 
+// THEME SWITCHER
+let switches = document.getElementsByClassName('switch');
+let style = localStorage.getItem('style');
+
+if (style == null) {
+  setTheme('light');
+} else {
+  setTheme(style);
+}
+
+for (let i of switches) {
+  i.addEventListener('click', function () {
+    let theme = this.dataset.theme;
+    setTheme(theme);
+  });
+}
+
+function setTheme(theme) {
+  if (theme == 'light') {
+    document.getElementById('switcher-id').href = './themes/light.css';
+  } else if (theme == 'pink') {
+    document.getElementById('switcher-id').href = './themes/pink.css';
+  } else if (theme == 'dark') {
+    document.getElementById('switcher-id').href = './themes/dark.css';
+  }
+  localStorage.setItem('style', theme);
+}
+
+
+// CLEAR DISPLAY STUFF
 let clearOnInput = false;
 
 function checkIfClear(value) {
@@ -15,7 +45,7 @@ if(clearOnInput == true && (value).match(/\d+/)) {
 function adjustFontSize() {
     const containerWidth = display.offsetWidth;
     const textWidth = displayText.scrollWidth;
-    const minimumSize = 45;
+    const minimumSize = 35;
 
     // Calculate the current font size
     let currentFontSize = parseFloat(getComputedStyle(displayText).fontSize);
@@ -26,7 +56,7 @@ function adjustFontSize() {
             displayText.style.fontSize = minimumSize + 'px';
         } else displayText.style.fontSize = newFontSize + 'px';
     } else if ((textWidth * 2) < containerWidth) {
-        displayText.style.fontSize = '60px'
+        displayText.style.fontSize = '65px'
     }
 }
 
@@ -35,21 +65,26 @@ function adjustFontSize() {
 /// Input every key pressed into Display
 document.addEventListener("keyup", (e) => {
     checkIfClear(e.key)
-
-    if(e.key == 'Enter' || e.key == '=') {
-        document.activeElement.blur();
-        calculateResult()
-    } else if (e.key == 'Backspace') {
-        removeLastItem()
-    } else if(e.key == ' ') {
-        document.activeElement.blur();
-        displayText.textContent += " ";
-    } else if (e.key == 'Escape') {
-        clearDisplay();
-    } else
-    displayText.textContent += e.key;
-    adjustFontSize()
-  });
+    console.log(e.key)
+    switch (e.key) {
+        case '=':
+        case 'Enter':
+            calculateResult();
+            break;
+        case 'Backspace':
+            removeLastItem();
+            break;
+        case 'Escape':
+            clearDisplay();
+            break;
+        case 'Shift': // So doing [shift+num] doesn't input shift at the end.
+            break;
+        default:
+            displayText.textContent += e.key;
+            break;
+    }
+        adjustFontSize();
+});
 
 /// Remove Firefox's 'Quick Find' feature so the '/' key works
 function keydown(event) {
@@ -73,6 +108,7 @@ buttons.forEach(button => {
 /// Function to handle button clicks and call adjustFontSize
 function handleButtonClick() {
     adjustFontSize();
+    document.activeElement.blur();
 }
 
 function appendToDisplay(value) {
@@ -81,6 +117,7 @@ function appendToDisplay(value) {
 
 function clearDisplay() {
     displayText.textContent = "";
+    displayBox.textContent = "";
 }
 
 function removeLastItem() {
@@ -144,7 +181,7 @@ function returnResult(string) {
         '%': 2,
         '^': 3,
         '√': 3,
-        '(': 0, // Added for precedence
+        '(': 0,
     };
 
     let array = string.split(/([+\-%*^/()√])/).filter(token => token.trim() !== '');
@@ -179,6 +216,15 @@ function returnResult(string) {
     }
 
     adjustFontSize();
+    let operation = document.createElement("p");
+    // Add space after operators and then turn into string
+    operation.textContent = mergedTokens.map(token => {
+        if (/[+\-%*^/√]/.test(token)) {
+            return ' ' + token + ' ';
+        } else {
+            return token;
+        }}).join("");
+    displayBox.appendChild(operation);
 }
 
 function infixToPostfix(infix) {

@@ -1,0 +1,88 @@
+body {
+    background-color: #F0E4E4;
+}
+
+.calculator {
+    background-color: #F6CCCC; 
+}
+
+
+.display-box {
+    background-color: #FF6666; 
+}
+.display-box p {
+    color: #FFFFFF; 
+}
+
+.display {
+    background-color: #745f6f;
+}
+.display p {
+    color: #FFFFFF;
+}
+
+
+.key, .double-key {
+    border-radius: 100px;
+    border: 0px;
+    transition: 0.2s;
+
+    color: #FFFFFF; 
+    font-weight: 600;
+    font-size: 30px;
+    font-family: 'orbitron', 'Noto Sans Math';
+}
+.key:active, .double-key:active {
+    transform: scale(1.03);
+}
+
+
+.bracket {
+    font-family: 'Noto Sans Math';
+}
+
+
+.double-key {
+    width: calc(25% * 2);
+    background-color: #FF3399; 
+}
+.double-key:hover {
+    background-color: #FF6399; 
+}
+.double-key:active {
+    background-color: #CC0066; 
+}
+
+
+.numeric {
+    background-color: #FF99CC; 
+}
+.numeric:hover {
+    background-color: #FF66CC;
+}
+.numeric:active {
+    background-color: #FF3399;
+}
+
+
+.non-numeric {
+    background-color: #FF6666;
+}
+.non-numeric:hover {
+    background-color: #FF6399;
+}
+.non-numeric:active {
+    background-color: #CC0066;
+}
+
+
+.delete {
+    color: #FFFFFF;
+    background-color: #CC3333;
+}
+.delete:hover {
+    background-color: #B22222;
+}
+.delete:active {
+    background-color: #990000;
+}

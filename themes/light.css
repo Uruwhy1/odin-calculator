@@ -1,0 +1,89 @@
+body {
+    background-color: #e0e0e0;
+}
+.calculator {
+    background-color: #FFFFFF ;
+}
+
+.display p {
+    color: #FFFFFF;
+}
+
+.display-box {
+    background-color: #FFCCCC;
+}
+.display-box p {
+    color: #000;
+}
+
+
+.key, .double-key {
+    border-radius: 10px;
+    border: 0px;
+    transition: 0.2s;
+
+    color: #000000 ;
+    font-weight: 600;
+    font-size: 30px;
+    font-family: 'orbitron', 'Noto Sans Math';
+}
+.key:active, .double-key:active {
+    transform: scale(1.03)
+}
+
+
+.bracket {
+    font-family: 'Noto Sans Math';
+}
+
+
+.double-key {
+    width: calc(25% * 2);
+    background-color: #008CBA;
+}
+.double-key:hover {
+    background-color: #0077B6;
+}
+.double-key:active {
+    background-color: #0056B3;
+}
+
+
+.numeric {
+    background-color: #E0E0E0;
+}
+.numeric:hover {
+    background-color: #CCCCCC;
+}
+.numeric:active {
+    background-color: #BFBFBF;
+}
+
+
+.non-numeric {
+    background-color: #FFA500;
+}
+.non-numeric:hover {
+    background-color: #FF9500   ;
+}
+.non-numeric:active{
+    background-color: #FF7F00;
+}
+
+
+.delete {
+    color:#FFFFFF ;
+    background-color:#FF6347;
+}
+.delete:hover {
+    background-color:#E74C3C ;
+}
+.delete:active {
+    background-color: #D95238;
+}
+
+/* Size increase for certain keys */
+.font {
+    font-size: 35px;
+    font-weight: 600;
+}
