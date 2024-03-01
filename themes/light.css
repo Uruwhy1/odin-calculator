@@ -1,5 +1,6 @@
 body {
-    background-color: #e0e0e0;
+    background: linear-gradient(to bottom right, #e0e0e0 50%, #e0e0e0b4 50%);
+
 }
 .calculator {
     background-color: #FFFFFF ;
@@ -16,6 +17,10 @@ body {
     color: #000;
 }
 
+
+.key {
+    width: 25%;
+}
 
 .key, .double-key {
     border-radius: 10px;

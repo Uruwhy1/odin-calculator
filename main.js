@@ -1,6 +1,7 @@
 const display = document.querySelector('.display');
 const displayBox = document.querySelector('.display-box')
 let displayText = document.querySelector('.display-numbers');
+let displayOperation = document.querySelector('.display-operation');
 
 // THEME SWITCHER
 let switches = document.getElementsByClassName('switch');
@@ -26,7 +27,9 @@ function setTheme(theme) {
     document.getElementById('switcher-id').href = './themes/pink.css';
   } else if (theme == 'dark') {
     document.getElementById('switcher-id').href = './themes/dark.css';
-  }
+  } else if(theme == 'square') {
+    document.getElementById('switcher-id').href = './themes/square.css';
+  } 
   localStorage.setItem('style', theme);
 }
 
@@ -117,7 +120,7 @@ function appendToDisplay(value) {
 
 function clearDisplay() {
     displayText.textContent = "";
-    displayBox.textContent = "";
+    displayOperation.textContent = "";
 }
 
 function removeLastItem() {
@@ -216,15 +219,13 @@ function returnResult(string) {
     }
 
     adjustFontSize();
-    let operation = document.createElement("p");
     // Add space after operators and then turn into string
-    operation.textContent = mergedTokens.map(token => {
+    displayOperation.textContent += mergedTokens.map(token => {
         if (/[+\-%*^/√]/.test(token)) {
             return ' ' + token + ' ';
         } else {
             return token;
         }}).join("");
-    displayBox.appendChild(operation);
 }
 
 function infixToPostfix(infix) {

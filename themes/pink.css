@@ -1,14 +1,20 @@
 body {
     background-color: #F0E4E4;
+    background: linear-gradient(to bottom right, #F0E4E4 50%, #fadefa 50%);
+
 }
 
 .calculator {
     background-color: #F6CCCC; 
+    box-shadow: 10px 10px 3px #000000;
+
+
 }
 
 
 .display-box {
     background-color: #FF6666; 
+    flex-wrap: nowrap;
 }
 .display-box p {
     color: #FFFFFF; 
@@ -22,10 +28,15 @@ body {
 }
 
 
+.key {
+    width: 25%;
+}
+
 .key, .double-key {
     border-radius: 100px;
-    border: 0px;
-    transition: 0.2s;
+    border: 0;
+    transition: 0.2s !important;
+
 
     color: #FFFFFF; 
     font-weight: 600;
@@ -34,6 +45,7 @@ body {
 }
 .key:active, .double-key:active {
     transform: scale(1.03);
+
 }
 
 
@@ -44,10 +56,12 @@ body {
 
 .double-key {
     width: calc(25% * 2);
-    background-color: #FF3399; 
+    background-color: #FF3399
+
 }
 .double-key:hover {
     background-color: #FF6399; 
+
 }
 .double-key:active {
     background-color: #CC0066; 

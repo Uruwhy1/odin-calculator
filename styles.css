@@ -5,6 +5,7 @@
 
 * {
     box-sizing: border-box;
+    transition: 0.3s;
 }
 
 html, body {
@@ -13,7 +14,7 @@ html, body {
 }
 
 html, body, .calculator, .key {
-    transition: 1s;
+    transition: 0.5s;
 }
 
 body {
@@ -24,6 +25,7 @@ body {
 }
 
 /* THEME SWITCHER CSS */
+
 .theme-switches {
     display: flex;
     justify-content: center;
@@ -54,7 +56,10 @@ body {
   background-color: #ff00ea;
 }
 
-
+#switch-4 {
+    border-radius: 0;
+    background-color: black;
+}
 /* CALCULATOR - DISPLAY CSS */
 
 .calculator {
@@ -70,6 +75,7 @@ body {
 .display-box {
     height: 30px;
     width: auto;
+    max-width: calc(100% - 35px);
     border-radius: 3px 3px 0px 0px;
     margin: 0 25px 0px 10px;
 
@@ -80,10 +86,15 @@ body {
     align-items: center;
 }
 .display-box p {
+    overflow: auto;
+    scrollbar-color: #999999  #333333;
+    scrollbar-width: thin;
+
     padding: 0 5px;
     margin: 0;
     font-size: 20px;
     font-family: 'Orbitron', 'Noto Sans Math', sans-serif;
+    white-space: nowrap;
 }
 
 .display {
@@ -158,6 +169,6 @@ body {
     gap: 5px;
 }
 
-.key {
-    width: 25%;
+.key, .double-key {
+    cursor: pointer;
 }

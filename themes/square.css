@@ -1,9 +1,23 @@
+
 body {
-    background: linear-gradient(to bottom right, #2E2E2E 50%, #3f3f3f 50%);
+    background: #585858;
 }
 
 .calculator {
-    background-color: #585858 ;
+    background-color: #58585800 ;
+    padding: 0px;
+    margin: 0;
+    margin-top: 25px;
+    border-radius: 0;
+
+}
+
+.display {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    border-radius: 0;
 }
 
 .display p {
@@ -11,35 +25,53 @@ body {
 }
 
 .display-box {
-    background-color: #924141;
+    position: absolute;
+    top: 160px;
+    max-width: 400px;
+    height: 0;
+    margin: 0;
 }
 .display-box p {
-    color: #fff;
+    color: #FFFFFF;
 }
 
+.keys-container {
+    gap: 0;
+    margin: 0;
+    padding: 0;
+}
+.row {
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+
+    height: 16.66666%;
+}
 
 .key {
     width: 25%;
+
 }
 
 .key, .double-key {
-    border-radius: 10px;
+    flex-shrink: 0;
+
+    border-radius: 0;
     border: 0px;
     transition: 0.2s;
+
+    height: 100%;
+    margin: 0;
+    padding: 0;
 
     color: #FFFFFF; 
     font-weight: 600;
     font-size: 30px;
     font-family: 'orbitron', 'Noto Sans Math';
 }
-.key:active, .double-key:active {
-    transform: scale(1.03);
-}
 
 
-.bracket {
-    font-family: 'Noto Sans Math';
-}
 
 
 .double-key {
@@ -77,12 +109,17 @@ body {
 
 
 .delete {
-    color: #FFFFFF; 
-    background-color: #CC3333;
+    background-color: #d33131;
 }
 .delete:hover {
     background-color: #B22222; 
 }
 .delete:active {
     background-color: #990000;
+}
+
+
+.bracket {
+    font-family: 'Noto Sans Math';
+    background-color: #af6504;
 }
