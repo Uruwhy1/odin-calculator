@@ -220,12 +220,22 @@ function returnResult(string) {
 
     adjustFontSize();
     // Add space after operators and then turn into string
-    displayOperation.textContent += mergedTokens.map(token => {
-        if (/[+\-%*^/√]/.test(token)) {
-            return ' ' + token + ' ';
-        } else {
-            return token;
-        }}).join("");
+    if(displayOperation.textContent == "") {
+        displayOperation.textContent += mergedTokens.map(token => {
+            if (/[+\-%*^/√]/.test(token)) {
+                return ' ' + token + ' ';
+            } else {
+                return token;
+            }}).join("");
+    } else {
+        displayOperation.textContent += " || " +  mergedTokens.map(token => {
+            if (/[+\-%*^/√]/.test(token)) {
+                return ' ' + token + ' ';
+            } else {
+                return token;
+            }}).join("");
+    }
+    
 }
 
 function infixToPostfix(infix) {

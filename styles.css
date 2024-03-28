@@ -90,7 +90,7 @@ body {
     scrollbar-color: #999999  #333333;
     scrollbar-width: thin;
 
-    padding: 0 5px;
+    padding: 2px 5px 0 5px;
     margin: 0;
     font-size: 20px;
     font-family: 'Orbitron', 'Noto Sans Math', sans-serif;
